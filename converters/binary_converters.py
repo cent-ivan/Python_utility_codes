@@ -3,7 +3,8 @@ print("Select a converter")
 print("""
     1. Binary to Decimal Converter
     2. Decimal to Binary Converter
-    3. Hexadecimal to Binary Converter
+    3. Decimal to Octal Converter
+    4. Hexaadecimal to Binary Converter
 """)
 
 #Parent Class
@@ -85,6 +86,25 @@ class HexadecimalBinary(Converter):
         
         return binary
 
+#DECIMAL TO OCTAL divides to 8
+class DecimalOctal(Converter):
+    def __init__(self) -> None:
+        self.octal = []
+
+    def get_input(self):
+        print("\nDecimal to octal Converter-------------------")
+        return super().get_input()
+    
+    def convert(self, data:int) -> str:
+        
+        if int(data) == 0: #Base case in order to stop the iteration
+            pass
+        else:
+            remainder = int(data) % 8
+            self.octal.insert(0, str(remainder))
+            self.convert(int(data) // 8)
+        result = "".join(self.octal) #joins together all elements in the list into string
+        return result
 
 
 #-------------------------------------------------------------
@@ -97,24 +117,27 @@ class ConverterFactory:
         elif choice == 2:
             return DecimalBinary()
         elif choice == 3:
-            return HexadecimalBinary()        
+            return DecimalOctal()  
+        elif choice == 4:
+            return HexadecimalBinary()  
+            
         else:
             raise ValueError("\n[!]Unknown Command")
 
 
 #starts here. User chooses what converter and enters what data to be converted
 def convert_data() -> None:
-    try:
+   
         choice = int(input("Select a number: "))
         converter = ConverterFactory.get_converter(choice)
         print(converter.convert(converter.get_input()))
 
-    except TypeError:
-        print("\nInvalid key. Try again and use a number\n")
-        convert_data()
+    # except TypeError:
+    #     print("\nInvalid key. Try again and use a number\n")
+    #     convert_data()
     
-    except Exception:
-        raise Exception
+    # except Exception:
+    #     raise Exception
 
 
 convert_data()
