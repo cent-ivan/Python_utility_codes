@@ -1,7 +1,8 @@
 
 import time
 
-start = time.perf_counter()
+start = time.perf_counter() #starts the performance timer
+#-Code here-------------------------------------------
 
 def is_prime(number:int): 
     count = 0
@@ -10,15 +11,16 @@ def is_prime(number:int):
             count += 1
     
     if count > 2:
-        print(f"{number} is not a prime number")
+        pass
     else:
         print(f"{number} is a prime number")
         # print(f"{number} / {base} == {number / base}")
 
-
-for i in range(2, 19):
+number = 110
+for i in range(2, number  + 1):
     is_prime(i)
 
+#----------------------------------------------------
 end = time.perf_counter()
 elapse_time = end - start
 print(f"{elapse_time} seconds")
